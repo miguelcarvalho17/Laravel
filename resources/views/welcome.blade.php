@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section ('title')
-Online Store
+Find Job
 @endsection
 @section ('content')
 <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">

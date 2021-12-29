@@ -9,15 +9,14 @@
                 <a class="nav-link" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">
                     <svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-list" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-                    </svg> COMPONENTES
+                    </svg> Type of Job
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{url('catalogue/processors') }}">Processors</a>
-                    <a class="dropdown-item" href="{{url('catalogue/graphics')}}">Graphics Cards</a>
+                    <a class="dropdown-item" href="{{url('catalogue/itJobs') }}">IT Jobs</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{url('catalogue/phones')}}">Phones</a>
+                    <a class="dropdown-item" href="{{url('catalogue/sports')}}">Sports Job</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{url('catalogue/consoles')}}">Consoles</a>
+                    <a class="dropdown-item" href="{{url('catalogue/healthcare')}}">Healthcare Jobs</a>
                 </div>
             </li>
         </ul>
@@ -44,6 +43,10 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ url('/form') }}">BackOffice</a>
                 <div class="dropdown-divider"></div>
+                    @elseif(Auth::user()->isCompany())
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ url('/form') }}">Post Job</a>
+                        <div class="dropdown-divider"></div>
                 @else
                 <div class="dropdown-divider"></div>
                 @endif
@@ -51,6 +54,12 @@
             </div>
         </div>
         @else
+            <a type="button" class="btn btn-outline-light" href="{{url('login')}}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bank2" viewBox="0 0 16 16">
+                    <path d="M8.277.084a.5.5 0 0 0-.554 0l-7.5 5A.5.5 0 0 0 .5 6h1.875v7H1.5a.5.5 0 0 0 0 1h13a.5.5 0 1 0 0-1h-.875V6H15.5a.5.5 0 0 0 .277-.916l-7.5-5zM12.375 6v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zM8 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2zM.5 15a.5.5 0 0 0 0 1h15a.5.5 0 1 0 0-1H.5z"/>
+                </svg>
+            </a>
+
         <a type="button" class="btn btn-outline-light" href="{{url('login')}}">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>

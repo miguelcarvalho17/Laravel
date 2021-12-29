@@ -16,13 +16,14 @@ class CreateJobsTable extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('company_id');
+            $table->integer('company_id')->nullable();
             $table->string('title');
             $table->string('company');
             $table->string('location');
             $table->string('logo')->nullable();
             $table->text('content');
-            $table->boolean('is_active')->default(false);
+            $table->string('salary')->default(1000);
+            $table->boolean('is_active')->default(true);
         });
     }
 

@@ -11,6 +11,15 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="company" id="company" value="option1" required>
+                            <label class="form-check-label" for="inlineRadio1">Company</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="jobSeeker" id="jobSeeker" value="option2">
+                            <label class="form-check-label" for="inlineRadio2">JobSeeker</label>
+                        </div>
+
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
@@ -43,7 +52,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Location') }}</label>
 
                             <div class="col-md-6">
-                                <input id="location" type="text" class="form-control @error('email') is-invalid @enderror" name="location" value="{{ old('location') }}" required autocomplete="location">
+                                <input id="location" type="text" class="form-control @error('location') is-invalid @enderror" name="location" value="{{ old('location') }}" required autocomplete="location">
 
                                 @error('location')
                                     <span class="invalid-feedback" role="alert">
