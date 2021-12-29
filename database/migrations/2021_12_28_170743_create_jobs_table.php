@@ -25,7 +25,9 @@ class CreateJobsTable extends Migration
             $table->string('salary')->default(1000);
             $table->boolean('is_active')->default(true);
         });
+        DB::statement("ALTER TABLE jobs MODIFY COLUMN logo MEDIUMBLOB"); 
     }
+    
 
     /**
      * Reverse the migrations.

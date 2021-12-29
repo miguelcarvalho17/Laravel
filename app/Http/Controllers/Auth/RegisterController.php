@@ -66,7 +66,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if (isset($_POST['jobSeeker'])){
+        $radioVal = $_POST["opcao"];
+        if ($radioVal=='jobSeeker'){
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -75,7 +76,7 @@ class RegisterController extends Controller
             'type' => 'user',
             'password' => Hash::make($data['password']),
         ]);
-        }elseif(isset($_POST['company'])){
+        }elseif($radioVal == 'company'){
             return User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
