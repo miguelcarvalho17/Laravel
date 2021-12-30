@@ -20,6 +20,7 @@ class CreateJobsTable extends Migration
             $table->string('title');
             $table->string('company');
             $table->string('location');
+            $table->string('contact');
             $table->string('logo')->nullable();
             $table->text('content');
             $table->string('salary')->default(1000);

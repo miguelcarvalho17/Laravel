@@ -40,14 +40,19 @@
             <input type="text" class="form-control" id="inputName" name="title">
         </div>
         <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="company">Company</label>
-                <input type="text" class="form-control" id="inputFirstSpect" name="company">
+            <div class="form-group col-md-4">
+                <label for="company">Salary</label>
+                <input type="text" class="form-control" id="inputFirstSpect" name="salary">
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <label for="location">Location</label>
                 <input type="TEXT" class="form-control" id="inputSecSpect" name="location">
             </div>
+            <div class="form-group col-md-4">
+                <label for="contact">Email</label>
+                <input type="TEXT" class="form-control" id="inputSecSpect" name="contact">
+            </div>
+
         </div>
         <div class="form-group">
             <label for="content">Content</label>
