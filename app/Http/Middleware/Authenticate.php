@@ -2,7 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use DebugBar\DebugBar;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class Authenticate extends Middleware
 {
@@ -14,6 +17,10 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
+        Debugbar::info(Auth::user()->isCompany());
+        if (Auth::user()->isCompany()){
+            return route('companyHome');
+        }
         if (! $request->expectsJson()) {
             return route('login');
         }

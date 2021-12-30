@@ -43,6 +43,11 @@ class User extends Authenticatable {
         'email_verified_at' => 'datetime',
     ];
 
+    public function jobs()
+    {
+        return $this->hasMany(Job::class);
+    }
+
     public function isCompany() {
         return $this->type === 'company';
     }

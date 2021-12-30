@@ -3,6 +3,7 @@
 Find Job
 @endsection
 @section ('content')
+    @include('includes.search')
 <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
     <form>
         <ol class="carousel-indicators">
@@ -39,7 +40,7 @@ Find Job
             href="{{ route('showJob', $job->title) }}"
         >
             <div class="md:w-16 md:mb-0 mb-6 mr-4 flex-shrink-0 flex flex-col">
-                <img src="/storage/{{ $job->logo }}" alt="{{ $job->company }} logo" class="w-16 h-16 rounded-full object-cover">
+                <img src="data:image/png;base64,{{ chunk_split(base64_encode($job->logo)) }}" alt="logotipo" Height="250" width="250"></img>
             </div>
             <div class="md:w-1/2 mr-8 flex flex-col items-start justify-center">
                 <h2 class="text-xl font-bold text-gray-900 title-font mb-1">{{ $job->title }}</h2>
