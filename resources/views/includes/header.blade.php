@@ -15,7 +15,7 @@
                 <a class="dropdown-item" href="{{ url('/account/settings') }}">Settings</a>
                 @if(Auth::user()->isAdmin())
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{{ url('/form') }}">BackOffice</a>
+                <a class="dropdown-item" href="{{ url('/formEditRemove') }}">Dashboard</a>
                 <div class="dropdown-divider"></div>
                     @elseif(Auth::user()->isCompany())
                         <div class="dropdown-divider"></div>

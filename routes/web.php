@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobController;
@@ -40,6 +40,10 @@ Route::post('/form', [CompanyController::class,'store'])->middleware('isCompany'
 Route::delete('/formEditRemove/{id}',[CompanyController::class,'removeJob'])->middleware('isCompany')->name('job.remove'); //passar id para saber qual remover
 Route::get('/formEditRemove',[CompanyController::class,'listJobs'])->name('formEditRemove');
 Route::put('/formEditRemove/{id}',[CompanyController::class,'editJobs'])->name('job.edit');
+
+Route::delete('/formEditRemove/{id}',[AdminController::class,'removeJob'])->middleware('isAdmin')->name('job.remove'); //passar ir para saber qual remover
+Route::get('/formEditRemove',[AdminController::class,'listJobs'])->middleware('isAdmin')->name('formEditRemove');
+Route::put('/formEditRemove/{id}',[AdminController::class,'editJobs'])->middleware('isAdmin')->name('job.edit');
 
 Route::get('/{job}', [JobController::class, 'show'])
     ->name('showJob');
