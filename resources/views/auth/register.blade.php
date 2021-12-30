@@ -13,9 +13,9 @@
 
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="opcao" id="company" value="company" required>
-                            <label class="form-check-label" for="inlineRadio1">company</label>
-                        
-                    
+                            <label class="form-check-label" for="inlineRadio1">Company</label>
+
+
                             <input class="form-check-input" type="radio" name="opcao" id="jobSeeker" value="jobSeeker">
                             <label class="form-check-label" for="inlineRadio2">JobSeeker</label>
                         </div>

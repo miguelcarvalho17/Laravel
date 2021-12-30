@@ -11,9 +11,9 @@
 <body>
     <div class = "container" >
         @include('includes.header')
+        @include('includes.search')
             @yield('content')
         @include('includes.footer')
-    
     </div>
 
 </body>

@@ -2,35 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Job;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 define("PAGINATON",1);
 
 class JobController extends Controller
 {
-
-    protected function checkOrder(Request $request, $id)
-    {
-        if ($request->input('select') == "NewestToOldest") {
-            $new = Job::where('id', $id)->latest()->paginate(PAGINATON);
-            return $new;
-        }
-        if ($request->input('select') == "OldestToNewest") {
-            $old = Job::where('id', $id)->oldest()->paginate(PAGINATON);
-            return $old;
-        }
-        return null;
-    }
-
-    public function indexMainPage() {
+    public function indexMainPage(Request $request) {
+        /*
         $jobs = DB::table('jobs')->limit(4);
         $jobs = $jobs->get();
         $array = [
             'jobs' => $jobs
         ];
-        return view('mainpage',['array' => $array]); 
-    } 
+        return view('welcome',['array' => $array]);
+        */
+
+        $query = Job::query()
+            ->where('is_active', true)
+            ->latest();
+
+        if ($request->has('s')) {
+            $searchQuery = trim($request->get('s'));
+
+            $query->where(function (Builder $builder) use ($searchQuery) {
+                $builder
+                    ->orWhere('title', 'like', "%{$searchQuery}%")
+                    ->orWhere('company', 'like', "%{$searchQuery}%")
+                    ->orWhere('location', 'like', "%{$searchQuery}%");
+            });
+        }
+
+        $jobs = $query->get();
+
+        return view('welcome', compact('jobs'));
+    }
+
+    public function show(Job $job)
+    {
+        return view('showJob', compact('job'));
+    }
 
 
     public function indexSearch(Request $request) {
@@ -88,5 +102,5 @@ class JobController extends Controller
         return redirect('account/shoppingCart');
     }
 */
-         
+
 }
