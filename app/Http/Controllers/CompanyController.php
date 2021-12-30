@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+define("PAGINATON",3);
 
 class CompanyController extends Controller
 {
@@ -52,14 +53,15 @@ class CompanyController extends Controller
         if ($id != null) {
             $job = Job::findOrFail($id);
             $job->delete();
-            return redirect('/removeJob')->with('sucessRemove', 'Job Removed Sucessefully');
+            return redirect('/formEditRemove')->with('sucessRemove', 'Job Removed Sucessefully');
         }
-        return redirect('/removeJob');
+        return redirect('/formEditRemove');
     }
 
     public function listJobs()
     {
-        return view('/formEditRemove', ['jobs' => $jobs]);
+        $jobs = Job::where('company_id', Auth::id())->get();
+        return view('/removeJob', ['jobs' => $jobs]);
     }
 
     public function editJobs(Request $request, $id) {

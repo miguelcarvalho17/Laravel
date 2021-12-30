@@ -23,7 +23,7 @@
                     <a class="nav-link" href="{{route('form')}}">Insert <span class="sr-only"></span></a>
                 </li>
                 <li>
-                    <a class="nav-link active" href="{{route('removeJob')}}">Edit/Remove <span class="sr-only"></span></a>
+                    <a class="nav-link active" href="{{route('formEditRemove')}}">Edit/Remove <span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="{{url('/')}}">Mainpage</a>
@@ -56,22 +56,19 @@
                     <td class="w-25">
                         <img src="data:image/png;base64,{{ chunk_split(base64_encode($job->logo)) }}" class="img-fluid img-thumbnail" alt="{{$job->name}}" width="300" height="300">
                     </td>
-                    <td style="font-size:20px"> <input type="text" name="job_name" id="title" class="form-control" value="{{ old('job_name') ? : $job->name }}">
-                        <ul style="font-size:17px">
-                            <li><input type="text" name="title" id="title" class="form-control" value="{{ old('title') ? : $job->title }}"></li>
-                            <li><input type="text" name="salary" id="title" class="form-control" value="{{ old('salary') ? : $job->salary }}"></li>
-                            <li><input type="text" name="location" id="title" class="form-control" value="{{ old('location') ? : $job->location }}"></li>
-                            <li><input type="text" name="content" id="title" class="form-control" value="{{ old('content') ? : $job->content }}"></li>
-                        </ul>
-                    </td>
 
+                    <td style="font-size:20px"><input type="text" name="title" id="title" class="form-control" value="{{ old('title') ? : $job->title }}"></td>
+                    <td style="font-size:20px"><input type="text" name="salary" id="title" class="form-control" value="{{ old('salary') ? : $job->salary }}"></td>
+                    <td style="font-size:20px"><input type="text" name="location" id="title" class="form-control" value="{{ old('location') ? : $job->location }}"></td>
+                    <td style="font-size:20px"><input type="text" name="content" id="title" class="form-control" value="{{ old('content') ? : $job->content }}"></td>
+                        
                     <td><input type="file" name="picture" class="form-control" id="exampleInputFile"></td>
                     <td><button type="submit" class="btn btn-info"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" name="edit">
                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                             </svg></button></td>
             </form>
-            <form action="{{route('removeJob',$job->id)}}" method="post"> <?php // passar o id por argumento para remover e em cima para editar
+            <form action="{{route('job.remove',$job->id)}}" method="post"> <?php // passar o id por argumento para remover e em cima para editar
                 ?>
                 @method('DELETE')
                 @csrf
@@ -86,8 +83,7 @@
         @endforelse
         </tbody>
         </table>
-        {!! $products->appends(Request::all())->links('pagination::bootstrap-4') !!} <?php //pagination
-        ?>
+      
         @if(Session::has('sucessEdit'))
             <p class="alert alert-success">{{ Session::get('sucessEdit') }}</p>
         @endif

@@ -31,15 +31,15 @@ Route::get('/', [JobController::class, 'indexMainPage'])->name('welcome');
 
 Auth::routes();
 
-Route::get('homeCompany', [HomeController::class, 'companyHome'])->middleware('isCompany')->name('companyHome');
+Route::get('/homeCompany', [HomeController::class, 'companyHome'])->middleware('isCompany')->name('homeCompany');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/form',[CompanyController::class,'create'])->middleware('isCompany')->name('form');
 Route::post('/form', [CompanyController::class,'store'])->middleware('isCompany');
-Route::delete('/removeJob/{id}',[CompanyController::class,'removeJob'])->middleware('isCompany')->name('removeJob'); //passar id para saber qual remover
-Route::get('/removeJob',[CompanyController::class,'listJobs'])->name('formEditRemove');
-Route::put('/removeJob/{id}',[CompanyController::class,'editJobs'])->name('job.edit');
+Route::delete('/formEditRemove/{id}',[CompanyController::class,'removeJob'])->middleware('isCompany')->name('job.remove'); //passar id para saber qual remover
+Route::get('/formEditRemove',[CompanyController::class,'listJobs'])->name('formEditRemove');
+Route::put('/formEditRemove/{id}',[CompanyController::class,'editJobs'])->name('job.edit');
 
 Route::get('/{job}', [JobController::class, 'show'])
     ->name('showJob');
