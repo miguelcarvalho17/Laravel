@@ -38,8 +38,8 @@
                 <tr style="font-weight:bold">
                     <th scope="col">Picture</th>
                     <th scope="col">Title</th>
-                    <th scope="col">Location</th>
                     <th scope="col">Salary</th>
+                    <th scope="col">Location</th>
                     <td scope="col">Content</td>
                     <td scope="col">Reenter Picture</td>
                     <th scope="col">Edit</th>
@@ -49,7 +49,7 @@
         </div>
         <tbody>
         @forelse($jobs as $job)
-            <form action="{{route('job.edit',$job->id)}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('job.editCompany',$job->id)}}" method="post" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
                 <tr>
@@ -61,8 +61,8 @@
                     <td style="font-size:20px"><input type="text" name="salary" id="title" class="form-control" value="{{ old('salary') ? : $job->salary }}"></td>
                     <td style="font-size:20px"><input type="text" name="location" id="title" class="form-control" value="{{ old('location') ? : $job->location }}"></td>
                     <td style="font-size:20px"><input type="text" name="content" id="title" class="form-control" value="{{ old('content') ? : $job->content }}"></td>
-                        
-                    <td><input type="file" name="picture" class="form-control" id="exampleInputFile"></td>
+
+                    <td><input type="file" name="logo" class="form-control" id="exampleInputFile"></td>
                     <td><button type="submit" class="btn btn-info"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" name="edit">
                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
@@ -83,7 +83,7 @@
         @endforelse
         </tbody>
         </table>
-      
+
         @if(Session::has('sucessEdit'))
             <p class="alert alert-success">{{ Session::get('sucessEdit') }}</p>
         @endif

@@ -12,16 +12,16 @@ class CompanyController extends Controller
 {
     public function validateJob(Request $request)
     {
-            $array = array('title' => $request->title, 'salary' => $request->salary, 'location' => $request->location, 'contact' => $request->contact,'content' => $request->job_content, 'picture' => $request->picture);
-            $validator = Validator::make($array, [
-                'title' => ['required', 'string'],
-                'salary' => ['required', 'string'],
-                'location' => ['required', 'string'],
-                'contact' => ['required', 'string'],
-                'content' => ['required', 'string'],
-                'picture' => ['required']
-            ]);
-            return $validator;
+        $array = array('title' => $request->title, 'salary' => $request->salary, 'location' => $request->location, 'contact' => $request->contact,'content' => $request->job_content, 'logo' => $request->logo);
+        $validator = Validator::make($array, [
+            'title' => ['required', 'string'],
+            'salary' => ['required', 'string'],
+            'location' => ['required', 'string'],
+            'contact' => ['required', 'string'],
+            'content' => ['required', 'string'],
+            'logo' => ['required']
+        ]);
+        return $validator;
     }
 
     public function store(Request $request)
@@ -42,7 +42,7 @@ class CompanyController extends Controller
             $job->company = $query->name;
 
             $job->content = $request->job_content;
-            $job->logo = file_get_contents($request->picture);
+            $job->logo = file_get_contents($request->logo);
             $job->save();
         }
         return redirect('/form');
@@ -69,13 +69,13 @@ class CompanyController extends Controller
         $job->title = $request->title;
         $job->salary = $request->salary;
         $job->location = $request->location;
-        $job->contact = $request->contact;
+        // $job->contact = $request->contact;
 
-        if($request->picture != null) {
-            $job->picture = file_get_contents($request->logo);
+        if($request->logo != null) {
+            $job->logo = file_get_contents($request->logo);
         }
         $job->save();
-        return redirect('formEditRemove')->with('sucessRemove', 'jobs Edited Sucessefully');
+        return redirect('formEditRemoveCompany')->with('sucessRemove', 'jobs Edited Sucessefully');
     }
 
     public function create()

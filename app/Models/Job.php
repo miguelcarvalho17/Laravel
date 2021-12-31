@@ -9,6 +9,10 @@ class Job extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'is_active',
+    ];
+
     public function getRouteKeyName()
     {
         return 'title';

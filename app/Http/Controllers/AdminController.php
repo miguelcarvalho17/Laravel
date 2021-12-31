@@ -1,41 +1,62 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Job;
 
 class AdminController extends Controller {
 
- 
     public function removeJob($id)
     {
         if ($id != null) {
             $job = Job::findOrFail($id);
             $job->delete();
-            return redirect('/formEditRemove')->with('sucessRemove', 'Job Removed Sucessefully');
+            return redirect('/removeJobAdmin')->with('sucessRemove', 'Job Removed Sucessefully');
         }
-        return redirect('/formEditRemove');
+        return redirect('/removeJobAdmin');
     }
 
     public function listJobs()
     {
         $jobs = Job::all();
-        return view('/removeJob', ['jobs' => $jobs]);
+        return view('/removeJobAdmin', ['jobs' => $jobs]);
     }
 
-    public function editJobs(Request $request, $id) {
+    public function rejectJob($id)
+    {
         $job = Job::findOrFail($id);
-        $job->title = $request->title;
-        $job->salary = $request->salary;
-        $job->location = $request->location;
-        $job->contact = $request->contact;
-
-        if($request->picture != null) {
-            $job->picture = file_get_contents($request->logo);
+        if ($job && $job->is_active == 0) {
+            $job->update(['is_active' => 1]);
+            $job->save();
+            return redirect('/formAdmin')->with('sucessRemove', 'Job status Updated Sucessefully');
+        }elseif ($job && $job->is_active == 1){
+            $job->update(['is_active' => 0]);
+            $job->save();
+            return redirect('/formAdmin')->with('sucessRemove', 'Job status Updated Sucessefully');
         }
-        $job->save();
-        return redirect('formEditRemove')->with('sucessRemove', 'jobs Edited Sucessefully');
+    }
+
+    public function showJobs(Request $request) {
+
+        $query = Job::query()
+            ->latest();
+
+        if ($request->has('s')) {
+            $searchQuery = trim($request->get('s'));
+
+            $query->where(function (Builder $builder) use ($searchQuery) {
+                $builder
+                    ->orWhere('title', 'like', "%{$searchQuery}%")
+                    ->orWhere('company', 'like', "%{$searchQuery}%")
+                    ->orWhere('location', 'like', "%{$searchQuery}%");
+            });
+        }
+
+        $jobs = $query->get();
+
+        return view('formAdmin', compact('jobs'));
     }
 
     public function __construct()

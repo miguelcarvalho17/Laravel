@@ -39,11 +39,13 @@ Route::get('/form',[CompanyController::class,'create'])->middleware('isCompany')
 Route::post('/form', [CompanyController::class,'store'])->middleware('isCompany');
 Route::delete('/formEditRemoveCompany/{id}',[CompanyController::class,'removeJob'])->middleware('isCompany')->name('job.removeCompany'); //passar id para saber qual remover
 Route::get('/formEditRemoveCompany',[CompanyController::class,'listJobs'])->name('formEditRemoveCompany');
-Route::put('/formEditRemoveCompany/{id}',[CompanyController::class,'editJobs'])->name('job.editCompany');
+Route::put('/formEditRemoveCompany/{id}',[CompanyController::class,'editJobs'])->middleware('isCompany')->name('job.editCompany');
 
-Route::delete('/formEditRemove/{id}',[AdminController::class,'removeJob'])->middleware('isAdmin')->name('job.remove'); //passar ir para saber qual remover
-Route::get('/formEditRemove',[AdminController::class,'listJobs'])->middleware('isAdmin')->name('formEditRemove');
-Route::put('/formEditRemove/{id}',[AdminController::class,'editJobs'])->middleware('isAdmin')->name('job.edit');
+
+Route::get('/formAdmin',[AdminController::class,'showJobs'])->middleware('isAdmin')->name('formAdmin');
+Route::put('/formAdmin/{id}',[AdminController::class,'rejectJob'])->middleware('isAdmin')->name('job.rejectJob');
+Route::delete('/removeJobAdmin/{id}',[AdminController::class,'removeJob'])->middleware('isAdmin')->name('job.remove'); //passar ir para saber qual remover
+Route::get('/removeJobAdmin',[AdminController::class,'listJobs'])->middleware('isAdmin')->name('removeJobAdmin');
 
 Route::get('/{job}', [JobController::class, 'show'])
     ->name('showJob');
