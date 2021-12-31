@@ -25,7 +25,7 @@
                     <a class="nav-link" href="{{route('form')}}">Insert <span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{route('formEditRemove')}}">Edit/Remove</a>
+                    <a class="nav-link" href="{{route('formEditRemoveCompany')}}">Edit/Remove</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="{{url('/')}}">Mainpage</a>

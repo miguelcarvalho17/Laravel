@@ -19,11 +19,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{route('form')}}">Insert <span class="sr-only"></span></a>
-                </li>
                 <li>
-                    <a class="nav-link active" href="{{route('formEditRemoveCompany')}}">Edit/Remove <span class="sr-only"></span></a>
+                    <a class="nav-link active" href="{{route('formEditRemove')}}">Edit/Remove <span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="{{url('/')}}">Mainpage</a>
@@ -68,7 +65,7 @@
                                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                             </svg></button></td>
             </form>
-            <form action="{{route('job.removeCompany',$job->id)}}" method="post"> <?php // passar o id por argumento para remover e em cima para editar
+            <form action="{{route('job.remove',$job->id)}}" method="post"> <?php // passar o id por argumento para remover e em cima para editar
                 ?>
                 @method('DELETE')
                 @csrf

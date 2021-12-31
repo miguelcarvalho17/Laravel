@@ -53,9 +53,9 @@ class CompanyController extends Controller
         if ($id != null) {
             $job = Job::findOrFail($id);
             $job->delete();
-            return redirect('/formEditRemove')->with('sucessRemove', 'Job Removed Sucessefully');
+            return redirect('/formEditRemoveCompany')->with('sucessRemove', 'Job Removed Sucessefully');
         }
-        return redirect('/formEditRemove');
+        return redirect('/formEditRemoveCompany');
     }
 
     public function listJobs()
