@@ -3,7 +3,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,15 +27,24 @@ Route::get('/', function () {
 
 Route::get('/', [JobController::class,'indexMainPage']);
 
-Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class,'logout']); //logout route
-
 Route::get('/', [JobController::class, 'indexMainPage'])->name('welcome');
+
+Route::get('/account/settings',[UserController::class,'information']);
+Route::get('/account/settings.php',[UserController::class,'updateInformation']);
+Route::post('/account/settings.php',[UserController::class,'updateInformation']);
+
+Route::get('/account/changeInfo',[UserController::class,'information']);
+Route::post('/account/changeInfo',[UserController::class,'updateInformation']);
 
 Auth::routes();
 
-Route::get('/homeCompany', [HomeController::class, 'companyHome'])->middleware('isCompany')->name('homeCompany');
+Route::get('company/home', [HomeController::class, 'companyHome'])->name('company.home')->middleware('isCompany');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+//Route::get('/homeCompany', [HomeController::class, 'companyHome'])->middleware('isCompany')->name('homeCompany');
+
+Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class,'logout'])->name('logout'); //logout route
 
 Route::get('/form',[CompanyController::class,'create'])->middleware('isCompany')->name('form');
 Route::post('/form', [CompanyController::class,'store'])->middleware('isCompany');

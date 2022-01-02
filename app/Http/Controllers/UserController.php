@@ -20,37 +20,39 @@ class UserController extends Controller
         return redirect('/account/login');
     }
 
-    public function updateaboutMe(Request $request)
+    public function updateInformation(Request $request)
     {
         $id = Auth::id();
-        $user = User::findorFail($id);  // encontrar o user por id (como receber este id aq) 
-        $array = array('aboutMe' => $request->aboutMe);
+        $user = User::findorFail($id);  // encontrar o user por id (como receber este id aq)
+        $array = array('aboutMe' => $request->aboutMe, 'location' => $request->location, 'email' => $request->email);
 
         $validator =  Validator::make($array, [ //validacao das variaveis retiradas do formulario
-            'aboutMe' => ['required', 'string']
+            'aboutMe' => ['required', 'string'],
+            'location' => ['required', 'string'],
+            'email' => ['required', 'string'],
         ]);
         if ($validator->fails()) {
-            return redirect('account/addAboutMe')->withErrors($validator)->withInput();
+            return redirect('account/changeInfo')->withErrors($validator)->withInput();
         } else {
             $user->aboutMe = $request->aboutMe;
+            $user->location = $request->location;
+            $user->email = $request->email;
             $user->save();
         }
         return redirect('/account/settings');
     }
-/*
-    public function indexMorada() {
+
+    public function information() {
         $id = Auth::id();
         $user = User::findorFail($id);
-        $array = array($user->streetName, $user->doorNumber, $user->floor, $user->zipcode,$user->name);
+        $array = array($user->email, $user->aboutMe, $user->location,$user->name);
         if (URL::current() === 'http://127.0.0.1:8000/account/settings') {
-            return view('/account/settings', ['address' => $array]);
-        } 
-        if (URL::current() === 'http://127.0.0.1:8000/account/addAddress') {
-            return view('/account/addAddress', ['address' => $array]);
-        } 
-            return view('account/checkout', ['address' => $array]);
+            return view('/account/settings', ['info' => $array]);
+        }
+        if (URL::current() === 'http://127.0.0.1:8000/account/changeInfo') {
+            return view('/account/changeInfo', ['info' => $array]);
+        }
     }
-    */
 
     public function isAdmin() {
         $id = Auth::id();

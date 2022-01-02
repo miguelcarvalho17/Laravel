@@ -1,25 +1,30 @@
-<section class="text-gray-600 body-font overflow-hidden">
-    <div class="container px-5 py-12 mx-auto">
-        <div class="mb-12 flex items-center">
-            <h2 class="text-2xl font-medium text-gray-900 title-font px-4">
-                Your Jobs ({{ $jobs->count()}})
-            </h2>
-        </div>
-        <div class="-my-6">
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Dashboard') }} Your Jobs ({{ $jobs->count()}})</div>
+        <div class="card-body">
             @foreach($jobs as $job)
                 <a
                     href="{{ route('showJob', $job->title) }}"
-                    class="py-6 px-4 flex flex-wrap md:flex-nowrap border-b border-gray-100 {{ $job->is_active ? 'bg-yellow-100 hover:bg-yellow-200' : 'bg-white hover:bg-gray-100' }}"
                 >
                     <div class="md:w-16 md:mb-0 mb-6 mr-4 flex-shrink-0 flex flex-col">
-                        <img src="/storage/{{ $job->logo }}" class="w-16 h-16 rounded-full object-cover">
+                        <img src="data:image/png;base64,{{ chunk_split(base64_encode($job->logo)) }}" alt="logotipo" Height="250" width="250"></img>
                     </div>
-                    <div class="justify-center">
+                    <div class="md:w-1/2 mr-8 flex flex-col items-start justify-center">
                         <h2 class="text-xl font-bold text-gray-900 title-font mb-1">{{ $job->title }}</h2>
-                        <p class="leading-relaxed text-gray-900">{{ $job->company }} &mdash; <span class="text-gray-600">{{ $job->location }}</span></p>
+                        <p class="leading-relaxed text-gray-900">
+                            {{ $job->company }} &mdash; <span class="text-gray-600">{{ $job->location }}</span>
+                        </p>
                     </div>
+                    <span class="md:flex-grow flex items-center justify-end">
+                        <span>{{ $job->created_at->diffForHumans() }}</span>
+                    </span>
                 </a>
             @endforeach
         </div>
     </div>
-</section>
+@endsection
