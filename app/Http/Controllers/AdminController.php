@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -57,6 +58,15 @@ class AdminController extends Controller {
         $jobs = $query->get();
 
         return view('formAdmin', compact('jobs'));
+    }
+
+    public function setAdmin($id){
+        $user = User::findOrFail($id);
+        if ($user){
+            $user->update(['type' => 'admin']);
+            $user->save();
+            return redirect('/admin/home');
+        }
     }
 
     public function __construct()

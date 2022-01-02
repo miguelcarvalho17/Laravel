@@ -17,12 +17,15 @@
                         {!! $job->content !!}
                     </div>
                     <div class="w-full md:w-1/4 pl-4">
-                        <img src="data:image/png;base64,{{ chunk_split(base64_encode($job->logo)) }}" alt="iphone 12" Height="250" width="250"></img>
                         <p class="leading-relaxed text-base">
                             <strong>Location: </strong>{{ $job->location }}<br>
-                            <strong>Company: </strong>{{ $job->company }}
+                            <strong>Company: </strong>{{ $job->company }}<br>
+                            <strong>Salary: </strong>{{ $job->salary }}
                         </p>
+                        <img src="data:image/png;base64,{{ chunk_split(base64_encode($job->logo)) }}" alt="iphone 12" Height="250" width="250"></img>
+                        @if(Auth::user()->isJobSeeker())
                         <a class="btn btn-dark" href={{ route('applyJob', $job->title) }}" role="button">Apply Now</a>
+                        @endif
                     </div>
                 </div>
             </div>

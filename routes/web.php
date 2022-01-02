@@ -40,9 +40,11 @@ Auth::routes();
 
 Route::get('company/home', [HomeController::class, 'companyHome'])->name('company.home')->middleware('isCompany');
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('isAdmin');
 
-//Route::get('/homeCompany', [HomeController::class, 'companyHome'])->middleware('isCompany')->name('homeCompany');
+Route::put('/admin/home/{id}',[AdminController::class,'setAdmin'])->middleware('isAdmin')->name('user.setAdmin');
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class,'logout'])->name('logout'); //logout route
 

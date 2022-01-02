@@ -55,4 +55,8 @@ class User extends Authenticatable {
     public function isAdmin() {
         return $this->type === 'admin';
     }
+
+    public function isJobSeeker(){
+        return $this->type === 'user';
+    }
 }
