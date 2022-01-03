@@ -16,19 +16,19 @@ class CreateJobsTable extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('company_id')->nullable();
+            $table->integer('company_id');
             $table->string('title');
             $table->string('company');
             $table->string('location');
             $table->string('contact');
             $table->string('logo')->nullable();
             $table->text('content');
-            $table->string('salary')->default(1000);
-            $table->boolean('is_active')->default(true);
+            $table->string('salary');
+            $table->boolean('is_active')->default(false);
         });
-        DB::statement("ALTER TABLE jobs MODIFY COLUMN logo MEDIUMBLOB"); 
+        DB::statement("ALTER TABLE jobs MODIFY COLUMN logo MEDIUMBLOB");
     }
-    
+
 
     /**
      * Reverse the migrations.

@@ -63,8 +63,5 @@ Route::get('/removeJobAdmin',[AdminController::class,'listJobs'])->middleware('i
 Route::get('/{job}', [JobController::class, 'show'])
     ->name('showJob');
 
-Route::get('/{job}/apply', [JobController::class, 'apply'])
-    ->name('applyJob');
-
-
-
+Route::get('/applyJob/{id}',[JobController::class,'create'])->name('applyJob');
+Route::post('/applyJob', [JobController::class, 'store']);
