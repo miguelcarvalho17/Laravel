@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class JobOffer extends Model
 {
     use HasFactory;
+
+    public function applyJob()
+    {
+        return $this->belongsTo(Job::class);
+    }
 }

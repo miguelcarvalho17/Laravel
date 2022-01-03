@@ -21,10 +21,11 @@
                             <strong>Location: </strong>{{ $job->location }}<br>
                             <strong>Company: </strong>{{ $job->company }}<br>
                             <strong>Salary: </strong>{{ $job->salary }}
+                            <strong>Type of Job: </strong>{{ $job->typeJob }}
                         </p>
-                        <img src="data:image/png;base64,{{ chunk_split(base64_encode($job->logo)) }}" alt="iphone 12" Height="250" width="250"></img>
+                        <img src="data:image/png;base64,{{ chunk_split(base64_encode($job->logo)) }}" alt="logo" Height="250" width="250"></img>
                         @if(Auth::user()->isJobSeeker())
-                        <a class="btn btn-dark" href={{ route('applyJob', $job->id) }}" role="button">Apply Now</a>
+                        <a class="btn btn-dark" href={{ route('applyJob', $job->id) }} role="button">Apply Now</a>
                         @endif
                     </div>
                 </div>

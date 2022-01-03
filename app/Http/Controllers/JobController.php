@@ -26,7 +26,8 @@ class JobController extends Controller
                 $builder
                     ->orWhere('title', 'like', "%{$searchQuery}%")
                     ->orWhere('company', 'like', "%{$searchQuery}%")
-                    ->orWhere('location', 'like', "%{$searchQuery}%");
+                    ->orWhere('location', 'like', "%{$searchQuery}%")
+                    ->orWhere('typeJob', 'like', "%{$searchQuery}%");
             });
         }
 
@@ -48,19 +49,15 @@ class JobController extends Controller
     }
 
     public function store(Request $request){
-        $validator = $this->validateJobOffer($request);
-        if ($validator->fails()) {
-            return redirect('/applyJob')->withErrors($validator)->withInput();
-        }else {
+        
             $jobOffer = new JobOffer();
             $job = Job::where('title', $request->jobId)->first();
-            $jobOffer->jobId = $job->id;
-            $jobOffer->userId= Auth::id();
+            $jobOffer->idJob = $job->id;
+            $jobOffer->idUser= Auth::id();
             $jobOffer->content = $request->offer_content;
             $jobOffer->cv = file_get_contents($request->cv);
             $jobOffer->save();
-        }
-        return redirect('/applyJob');
+            return redirect('/');
     }
 
     public function create($id)

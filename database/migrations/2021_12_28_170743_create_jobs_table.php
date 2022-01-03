@@ -18,6 +18,7 @@ class CreateJobsTable extends Migration
             $table->timestamps();
             $table->integer('company_id');
             $table->string('title');
+            $table->string('typeJob');
             $table->string('company');
             $table->string('location');
             $table->string('contact');
@@ -28,8 +29,6 @@ class CreateJobsTable extends Migration
         });
         DB::statement("ALTER TABLE jobs MODIFY COLUMN logo MEDIUMBLOB");
     }
-
-
     /**
      * Reverse the migrations.
      *

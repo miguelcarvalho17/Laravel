@@ -44,6 +44,7 @@ Find Job
             </div>
             <div class="md:w-1/2 mr-8 flex flex-col items-start justify-center">
                 <h2 class="text-xl font-bold text-gray-900 title-font mb-1">{{ $job->title }}</h2>
+                <h2 class="text-xl font-bold text-gray-900 title-font mb-1">{{ $job->typeJob }}</h2>
                 <p class="leading-relaxed text-gray-900">
                     {{ $job->company }} &mdash; <span class="text-gray-600">{{ $job->location }}</span>
                 </p>
