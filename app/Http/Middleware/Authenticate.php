@@ -17,10 +17,6 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        Debugbar::info(Auth::user()->isCompany());
-        if (Auth::user()->isCompany()){
-            return route('companyHome');
-        }
         if (! $request->expectsJson()) {
             return route('login');
         }

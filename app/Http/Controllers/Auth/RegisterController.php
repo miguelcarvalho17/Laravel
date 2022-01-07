@@ -67,14 +67,14 @@ class RegisterController extends Controller
     {
         $radioVal = $_POST["opcao"];
         if ($radioVal=='jobSeeker'){
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'location' => $data['location'],
-            'aboutMe' => '',
-            'type' => 'user',
-            'password' => Hash::make($data['password']),
-        ]);
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'location' => $data['location'],
+                'aboutMe' => '',
+                'type' => 'user',
+                'password' => Hash::make($data['password']),
+            ]);
         }elseif($radioVal == 'company'){
             return User::create([
                 'name' => $data['name'],

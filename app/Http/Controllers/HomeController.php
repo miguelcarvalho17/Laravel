@@ -32,7 +32,7 @@ class HomeController extends Controller
 
     public function companyHome(){
         $jobs = Job::where('company_id', Auth::id())->get();
-       return view('companyHome')->with('jobs', $jobs);
+        return view('companyHome')->with('jobs', $jobs);
     }
 
     public function adminHome(){

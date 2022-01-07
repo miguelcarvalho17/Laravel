@@ -12,10 +12,18 @@
                 </svg>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @if(Auth::user()->isAdmin())
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{ url('/admin/home') }}">Dashboard</a>
+                    @elseif(Auth::user()->isCompany())
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ url('/company/home') }}">Dashboard</a>
+                @endif
+                    <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ url('/account/settings') }}">Settings</a>
                 @if(Auth::user()->isAdmin())
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{{ url('/formAdmin') }}">Dashboard</a>
+                <a class="dropdown-item" href="{{ url('/formAdmin') }}">Management</a>
                 <div class="dropdown-divider"></div>
                     @elseif(Auth::user()->isCompany())
                         <div class="dropdown-divider"></div>

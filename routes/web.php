@@ -65,3 +65,7 @@ Route::get('/{job}', [JobController::class, 'show'])
 
 Route::get('/applyJob/{id}',[JobController::class,'create'])->name('applyJob');
 Route::post('/applyJob', [JobController::class, 'store']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
