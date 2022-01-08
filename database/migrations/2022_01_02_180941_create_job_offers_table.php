@@ -17,6 +17,7 @@ class CreateJobOffersTable extends Migration
             $table->id();
             $table->integer('idJob');
             $table->integer('idUser');
+            $table->string('nameUser');
             $table->string('content');
             $table->string('cv');
             $table->timestamps();

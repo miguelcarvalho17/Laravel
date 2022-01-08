@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -26,5 +27,31 @@
                 </a>
             @endforeach
         </div>
+                    <div class="card-header">{{ __('Dashboard') }} Aplications ({{ count($jobOffers)}})</div>
+                    <div class="card-body">
+                        @foreach($jobOffers as $joffer)
+                            @foreach($joffer as $offer)
+                                <div class="md:w-16 md:mb-0 mb-6 mr-4 flex-shrink-0 flex flex-col">
+                                <div class="md:w-1/2 mr-8 flex flex-col items-start justify-center">
+                                    <p class="leading-relaxed text-gray-900">
+                                        <span class="text-gray-600">{{ $job->title }}</span>
+                                    </p>
+                                    <p class="leading-relaxed text-gray-900">
+                                        {{$offer->nameUser}} &mdash; <span class="text-gray-600">{{ $job->title }}</span>
+                                    </p>
+                                    <h2 class="text-xl font-bold text-gray-900 title-font mb-1">{{ $offer->content }}</h2>
+                                </div>
+                                    <form action="{{route('generate-PDF',$offer->idUser)}}" method="post" enctype="multipart/form-data"> <?php // passar o id por argumento para update base dados
+                                        ?>
+                                        @method('PUT')
+                                        @csrf
+                                        <button type="submit" class="btn btn-dark">Download Resume</button>
+                                    </form>
+                    </span>
+                                    @endforeach
+                        @endforeach
+                    </div>
+                    <div class="card-body">
+                    </div>
     </div>
 @endsection

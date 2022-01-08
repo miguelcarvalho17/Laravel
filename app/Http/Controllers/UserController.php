@@ -46,10 +46,10 @@ class UserController extends Controller
         $id = Auth::id();
         $user = User::findorFail($id);
         $array = array($user->email, $user->aboutMe, $user->location,$user->name);
-        if (URL::current() === 'http://127.0.0.1:8000/account/settings') {
+        if (URL::current() === 'http://findjob.pt/account/settings') {
             return view('/account/settings', ['info' => $array]);
         }
-        if (URL::current() === 'http://127.0.0.1:8000/account/changeInfo') {
+        if (URL::current() === 'http://findjob.pt/account/changeInfo') {
             return view('/account/changeInfo', ['info' => $array]);
         }
     }

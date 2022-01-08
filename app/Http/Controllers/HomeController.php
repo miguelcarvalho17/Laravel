@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
+use App\Models\JobOffer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,14 @@ class HomeController extends Controller
 
     public function companyHome(){
         $jobs = Job::where('company_id', Auth::id())->get();
-        return view('companyHome')->with('jobs', $jobs);
+        $jobOffers = array();
+        foreach ($jobs as $job){
+            if (JobOffer::where('idJob', $job->id)->exists()){
+                $joffer = JobOffer::where('idJob', $job->id)->get();
+                array_push($jobOffers, $joffer);
+            }
+        }
+        return view('companyHome', compact('jobs', 'jobOffers'));
     }
 
     public function adminHome(){

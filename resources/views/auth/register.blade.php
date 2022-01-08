@@ -10,14 +10,16 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
-
-                            <div class="form-check form-check-inline">
+                            <div class ="d-flex">
+                            <div class ="ml-6">
                                 <input class="form-check-input" type="radio" name="opcao" id="company" value="company" required>
                                 <label class="form-check-label" for="inlineRadio1">Company</label>
+                            </div>
 
-
+                            <div>
                                 <input class="form-check-input" type="radio" name="opcao" id="jobSeeker" value="jobSeeker">
                                 <label class="form-check-label" for="inlineRadio2">JobSeeker</label>
+                            </div>
                             </div>
 
                             <div class="row mb-3">

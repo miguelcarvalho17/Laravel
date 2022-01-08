@@ -38,22 +38,24 @@ class JobController extends Controller
 
     public function validateJobOffer(Request $request)
     {
-        $array = array('userId' => $request->userId, 'jobId' => $request->jobId,'offer_content' => $request->offer_content, 'cv' => $request->cv);
+        $array = array('userId' => $request->userId, 'jobId' => $request->jobId,'nameUser' => $request->nameUser, 'offer_content' => $request->offer_content, 'cv' => $request->cv);
         $validator = Validator::make($array, [
             'userId' => ['required'],
             'jobId' => ['required'],
+            'nameUser' => ['required'],
             'offer_content' => ['required', 'string'],
-            'cv' => ['required']
+            'cv' => ['required|mimes:pdf|max:2000'],
         ]);
         return $validator;
     }
 
     public function store(Request $request){
-        
+
             $jobOffer = new JobOffer();
             $job = Job::where('title', $request->jobId)->first();
             $jobOffer->idJob = $job->id;
             $jobOffer->idUser= Auth::id();
+            $jobOffer->nameUser = User::where('id', Auth::id())->value('name');
             $jobOffer->content = $request->offer_content;
             $jobOffer->cv = file_get_contents($request->cv);
             $jobOffer->save();
