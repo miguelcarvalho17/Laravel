@@ -45,6 +45,7 @@ class HomeController extends Controller
 
     public function adminHome(){
         $users = User::where('type', 'user')->get();
-        return view('adminHome')->with('users', $users);
+        $persons = User::where('type', '!=', 'admin')->get();
+        return view('adminHome', compact('users', 'persons'));
     }
 }

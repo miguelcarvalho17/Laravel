@@ -33,12 +33,13 @@
             </ul>
         </div>
     </nav>
-    <form action="{{url('/formAdmin')}}" method="post" enctype="multipart/form-data">
         <div class="mb-12">
             <h2 class="text-2xl font-medium text-gray-900 title-font px-4">All jobs ({{ $jobs->count() }})</h2>
         </div>
         <div class="-my-6">
             @foreach($jobs as $job)
+                <form action="{{route('job.rejectJob',$job->id)}}" method="post" enctype="multipart/form-data">
+
                 <a
                     href="{{ route('showJob', $job->title) }}"
                 >
@@ -62,15 +63,14 @@
                     @endif
                 </a>
             <br>
-                <form action="{{route('job.rejectJob',$job->id)}}" method="post" enctype="multipart/form-data"> <?php // passar o id por argumento para update base dados
-                    ?>
-                    @method('PUT')
-                    @csrf
-                    <button type="submit">Update Is Active</button>
+              <!--passar o id por argumento para update base dados-->
+                @method('PUT')
+                @csrf
+                <button type="submit">Update Is Active</button>
                 </form>
             @endforeach
         </div>
-    </form>
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

@@ -45,6 +45,8 @@ Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home
 
 Route::put('/admin/home/{id}',[AdminController::class,'setAdmin'])->middleware('isAdmin')->name('user.setAdmin');
 
+Route::delete('/admin/home/{person}',[AdminController::class,'deleteUser'])->middleware('isAdmin')->name('user.delete');
+
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class,'logout'])->name('logout'); //logout route

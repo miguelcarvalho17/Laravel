@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\JobOffer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
@@ -65,6 +66,32 @@ class AdminController extends Controller {
         if ($user){
             $user->update(['type' => 'admin']);
             $user->save();
+            return redirect('/admin/home');
+        }
+    }
+
+    public function deleteUser($id){
+        $user = User::findOrFail($id);
+        if ($user){
+            $user->delete();
+            if ($user->type === 'company'){
+                $jobs = Job::where('company_id', $user->id)->get();
+                foreach ($jobs as $job){
+                    if (JobOffer::where('idJob', $job->id)->exists()){
+                        $jobOffers = JobOffer::where('idJob', $job->id)->get();
+                        foreach ($jobOffers as $jobOffer){
+                            $jobOffer->delete();
+                        }
+                    }
+                    $job->delete();
+                }
+            }else{
+                $jobOffers = JobOffer::where('idUser', $user->id);
+                foreach ($jobOffers as $jobOffer){
+                    $jobOffer->delete();
+                }
+            }
+
             return redirect('/admin/home');
         }
     }
