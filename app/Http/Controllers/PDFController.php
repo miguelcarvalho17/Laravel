@@ -19,8 +19,4 @@ class PDFController extends Controller
         $pdf = PDF::loadView('myPDF', $data);
         return $pdf->download('myPDF.pdf');
     }
-
-    public function getPDF($id){
-
-    }
 }

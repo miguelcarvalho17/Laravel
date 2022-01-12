@@ -91,7 +91,6 @@ class AdminController extends Controller {
                     $jobOffer->delete();
                 }
             }
-
             return redirect('/admin/home');
         }
     }

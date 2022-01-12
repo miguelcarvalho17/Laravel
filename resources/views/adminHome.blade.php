@@ -45,7 +45,7 @@
                             </p>
                         </div>
                         <span class="md:flex-grow flex items-center justify-end">
-                        <span>{{ $user->created_at->diffForHumans() }}</span>
+                        <span>{{ $person->created_at->diffForHumans() }}</span>
                     </span>
                         <br>
                         <form action="{{route('user.delete',$person->id)}}" method="post" enctype="multipart/form-data"> <?php // passar o id por argumento para update base dados

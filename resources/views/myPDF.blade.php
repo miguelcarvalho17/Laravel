@@ -6,9 +6,10 @@
 </head>
 
 <body>
-<h1>Name: {{ $nome }}</h1>
-<p>Location:{{ $location }}</p>
-<p>Contact:{{ $email }}</p>
+<h1>Details:</h1>
+<p><strong>Name:</strong> {{ $nome }}</p>
+<p><strong>Location:</strong>{{ $location }}</p>
+<p><strong>Contact:</strong>{{ $email }}</p>
 
 <h2>My qualifications:</h2>
 
