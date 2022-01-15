@@ -21,16 +21,15 @@
     <div class="row">
         <div class="col-12">
             <table class="table table-image" style="background-color:white">
+                <
                 <thead>
                     <tr>
                         <th scope="col">Picture</th>
                         <th scope="col">Name</th>
-                        <!--
-                        <th scope="col">Price</th>
-                        <th scope="col">Add To Cart</th>
--->
                     </tr>
                 </thead>
                 @yield('content')
                 @include ('includes.footer')
         </div>
+    </div>
+</div>

@@ -13,7 +13,7 @@ class CompanyController extends Controller
     public function validateJob(Request $request)
     {
         $array = array('title' => $request->title, 'typeJob' => $request->typeJob,'salary' => $request->salary, 'location' => $request->location, 'contact' => $request->contact,'content' => $request->job_content, 'logo' => $request->logo);
-        $validator = Validator::make($array, [
+        return Validator::make($array, [
             'title' => ['required', 'string'],
             'typeJob' => ['required', 'string'],
             'salary' => ['required', 'string'],
@@ -22,7 +22,6 @@ class CompanyController extends Controller
             'content' => ['required', 'string'],
             'logo' => ['required']
         ]);
-        return $validator;
     }
 
     public function store(Request $request)
@@ -71,8 +70,6 @@ class CompanyController extends Controller
         $job->title = $request->title;
         $job->salary = $request->salary;
         $job->location = $request->location;
-        // $job->contact = $request->contact;
-
         if($request->logo != null) {
             $job->logo = file_get_contents($request->logo);
         }

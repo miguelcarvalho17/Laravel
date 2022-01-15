@@ -29,15 +29,14 @@ class AdminController extends Controller {
     public function rejectJob($id)
     {
         $job = Job::findOrFail($id);
-        if ($job && $job->is_active == 0) {
+        if ($job->is_active == 0) {
             $job->update(['is_active' => 1]);
             $job->save();
             return redirect('/formAdmin')->with('sucessRemove', 'Job status Updated Sucessefully');
-        }elseif ($job && $job->is_active == 1){
+        }
             $job->update(['is_active' => 0]);
             $job->save();
             return redirect('/formAdmin')->with('sucessRemove', 'Job status Updated Sucessefully');
-        }
     }
 
     public function showJobs(Request $request) {
@@ -72,27 +71,25 @@ class AdminController extends Controller {
 
     public function deleteUser($id){
         $user = User::findOrFail($id);
-        if ($user){
             $user->delete();
-            if ($user->type === 'company'){
+            if ($user->type === 'company') {
                 $jobs = Job::where('company_id', $user->id)->get();
-                foreach ($jobs as $job){
-                    if (JobOffer::where('idJob', $job->id)->exists()){
+                foreach ($jobs as $job) {
+                    if (JobOffer::where('idJob', $job->id)->exists()) {
                         $jobOffers = JobOffer::where('idJob', $job->id)->get();
-                        foreach ($jobOffers as $jobOffer){
+                        foreach ($jobOffers as $jobOffer) {
                             $jobOffer->delete();
                         }
                     }
                     $job->delete();
                 }
-            }else{
+                return redirect('/admin/home');
+            }
                 $jobOffers = JobOffer::where('idUser', $user->id);
                 foreach ($jobOffers as $jobOffer){
                     $jobOffer->delete();
                 }
-            }
             return redirect('/admin/home');
-        }
     }
 
     public function __construct()

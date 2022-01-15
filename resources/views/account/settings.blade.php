@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="form-group">
-                                    <div class="col"><a type="button" class="btn btn-dark" style="background-color:#2e4057;position:relative;top:20%;" name="alterarInfo" href="{{url('account/changeInfo')}}">Change Info</a></div>
+                                    <div class="col"><a type="button" class="btn btn-dark" style="background-color:#2e4057;position:relative;top:20%;" href="{{url('account/changeInfo')}}">Change Info</a></div>
                             </div>
                         </div>
                     </div>
