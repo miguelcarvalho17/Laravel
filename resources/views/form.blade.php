@@ -37,35 +37,30 @@
             @csrf
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" id="inputName" name="title">
+                <input type="text" class="form-control" id="inputName" name="title" value="{{old('title')}}">
             </div>
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Type of job</label>
-                <select class="form-control" id="exampleFormControlSelect1" name="typeJob">
+                <select class="form-control" id="exampleFormControlSelect1" name="typeJob" value="{{old('typeJob')}}">
                     <option value="" selected disabled hidden>Choose here</option>
-                    <option>Part Time</option>
-                    <option>Full Time</option>
-                    <option>Volunteer</option>
-                    <option>Internship</option>
+                    <option value="pt">Part Time</option>
+                    <option value="ft">Full Time</option>
+                    <option value="vt">Volunteer</option>
+                    <option value="it">Internship</option>
                 </select>
                 <div class="form-row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <label for="company">Salary</label>
-                        <input type="text" class="form-control" id="inputFirstSpect" name="salary">
+                        <input type="text" class="form-control" id="inputFirstSpect"  value="{{old('salary')}}"name="salary">
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <label for="location">Location</label>
-                        <input type="TEXT" class="form-control" id="inputSecSpect" name="location">
+                        <input type="TEXT" class="form-control" id="inputSecSpect"  value="{{old('location')}}"name="location">
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="contact">Email</label>
-                        <input type="TEXT" class="form-control" id="inputSecSpect" name="contact">
-                    </div>
-
                 </div>
                 <div class="form-group">
                     <label for="content">Content</label>
-                    <textarea id="content" name="job_content" rows="5" cols="128">
+                    <textarea id="content" name="job_content" rows="5" cols="128">{!! old('job_content') !!}
             </textarea>
                 </div>
 
@@ -75,6 +70,9 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        @if(Session::has('sucessInsert'))
+            <p class="alert alert-success">{{ Session::get('sucessInsert') }}</p>
+        @endif
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

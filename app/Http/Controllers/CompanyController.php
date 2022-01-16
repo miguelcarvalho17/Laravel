@@ -12,13 +12,12 @@ class CompanyController extends Controller
 {
     public function validateJob(Request $request)
     {
-        $array = array('title' => $request->title, 'typeJob' => $request->typeJob,'salary' => $request->salary, 'location' => $request->location, 'contact' => $request->contact,'content' => $request->job_content, 'logo' => $request->logo);
+        $array = array('title' => $request->title, 'typeJob' => $request->typeJob,'salary' => $request->salary, 'location' => $request->location,'content' => $request->job_content, 'logo' => $request->logo);
         return Validator::make($array, [
             'title' => ['required', 'string'],
             'typeJob' => ['required', 'string'],
             'salary' => ['required', 'string'],
             'location' => ['required', 'string'],
-            'contact' => ['required', 'string'],
             'content' => ['required', 'string'],
             'logo' => ['required']
         ]);
@@ -35,10 +34,10 @@ class CompanyController extends Controller
             $job->typeJob = $request->typeJob;
             $job->salary = $request->salary;
             $job->location = $request->location;
-            $job->contact = $request->contact;
+            
 
-            $query =  User::where('email', $job->contact)->first();
-
+            $query = User::where('id',Auth::id())->first();
+            $job->contact = $query->email;
             $job->company_id = $query->id;
             $job->company = $query->name;
 
@@ -46,7 +45,7 @@ class CompanyController extends Controller
             $job->logo = file_get_contents($request->logo);
             $job->save();
         }
-        return redirect('/form');
+        return redirect('/form')->with('sucessInsert', 'Job inserted successfully');;
     }
 
     public function removeJob($id)
