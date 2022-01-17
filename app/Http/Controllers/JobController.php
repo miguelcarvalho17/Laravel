@@ -32,7 +32,6 @@ class JobController extends Controller
         }
 
         $jobs = $query->get();
-
         return view('welcome', compact('jobs'));
     }
 
@@ -49,7 +48,6 @@ class JobController extends Controller
     }
 
     public function store(Request $request){
-
             $jobOffer = new JobOffer();
             $job = Job::where('title', $request->jobId)->first();
             $jobOffer->idJob = $job->id;
@@ -58,7 +56,7 @@ class JobController extends Controller
             $jobOffer->content = $request->offer_content;
             $jobOffer->cv = file_get_contents($request->cv);
             $jobOffer->save();
-            return redirect('/');
+            return redirect('/')->with('sucessInsert', 'Applied to job sucessfully');
     }
 
     public function create($id)

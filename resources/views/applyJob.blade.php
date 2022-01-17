@@ -29,4 +29,7 @@
             <button type="submit" class="btn btn-primary mb-2">Apply</button>
         </div>
     </form>
+    @if(Session::has('sucessInsert'))
+        <p class="alert alert-success">{{ Session::get('sucessInsert') }}</p>
+    @endif
 @endsection

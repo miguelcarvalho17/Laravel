@@ -34,7 +34,7 @@ class CompanyController extends Controller
             $job->typeJob = $request->typeJob;
             $job->salary = $request->salary;
             $job->location = $request->location;
-            
+
 
             $query = User::where('id',Auth::id())->first();
             $job->contact = $query->email;
@@ -45,7 +45,7 @@ class CompanyController extends Controller
             $job->logo = file_get_contents($request->logo);
             $job->save();
         }
-        return redirect('/form')->with('sucessInsert', 'Job inserted successfully');;
+        return redirect('/form')->with('sucessInsert', 'Job inserted successfully');
     }
 
     public function removeJob($id)

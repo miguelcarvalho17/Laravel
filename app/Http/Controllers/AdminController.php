@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 use App\Models\JobOffer;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Job;
 
@@ -43,30 +41,15 @@ class AdminController extends Controller {
 
         $query = Job::query()
             ->latest();
-
-        if ($request->has('s')) {
-            $searchQuery = trim($request->get('s'));
-
-            $query->where(function (Builder $builder) use ($searchQuery) {
-                $builder
-                    ->orWhere('title', 'like', "%{$searchQuery}%")
-                    ->orWhere('company', 'like', "%{$searchQuery}%")
-                    ->orWhere('location', 'like', "%{$searchQuery}%");
-            });
-        }
-
         $jobs = $query->get();
-
         return view('formAdmin', compact('jobs'));
     }
 
     public function setAdmin($id){
         $user = User::findOrFail($id);
-        if ($user){
             $user->update(['type' => 'admin']);
             $user->save();
             return redirect('/admin/home');
-        }
     }
 
     public function deleteUser($id){

@@ -49,9 +49,7 @@ class UserController extends Controller
         if (URL::current() === 'http://findjob.pt/account/settings') {
             return view('/account/settings', ['info' => $array]);
         }
-        if (URL::current() === 'http://findjob.pt/account/changeInfo') {
             return view('/account/changeInfo', ['info' => $array]);
-        }
     }
 
     public function isAdmin() {
